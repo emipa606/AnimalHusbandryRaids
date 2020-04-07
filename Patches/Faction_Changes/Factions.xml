@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	
+	<!-- Adding Animals To Faction Bases for Defense -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "OutlanderFactionBase"]/pawnGroupMakers/li[4]/options</xpath>
+		<value>
+			<LabradorRetriever>8</LabradorRetriever>
+			<Husky>7</Husky>
+		</value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "TribeBase"]/pawnGroupMakers/li[6]/options</xpath>
+		<value>
+			<WildBoar>20</WildBoar>
+		    <Wolf_Timber>14</Wolf_Timber>
+		</value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[defName = "Pirate"]/pawnGroupMakers/li[7]/options</xpath>
+		<value>
+			<Boomrat>2</Boomrat>
+			<Cougar>1</Cougar>
+		</value>
+    </Operation>
+	
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/FactionDef[defName = "Empire"]</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/FactionDef[defName = "Empire"]/pawnGroupMakers/li[2]/options</xpath>
+				<value>
+					<Bear_Grizzly>1</Bear_Grizzly>
+					<Elephant>1</Elephant>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/FactionDef[defName = "Empire"]/pawnGroupMakers/li[3]/options</xpath>
+				<value>
+					<Bear_Grizzly>2</Bear_Grizzly>
+					<Elephant>2</Elephant>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+	
+	<!-- Adding Animals To Faction Raid Parties -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "OutlanderFactionBase"]/pawnGroupMakers/li[1]/options</xpath>
+		<value>
+			<LabradorRetriever>4</LabradorRetriever>
+			<Husky>3</Husky>
+		</value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "TribeBase"]/pawnGroupMakers/li[1]/options</xpath>
+		<value>
+			<WildBoar>5</WildBoar>
+		    <Wolf_Timber>5</Wolf_Timber>
+		</value>
+    </Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "TribeBase"]/pawnGroupMakers/li[2]/options</xpath>
+		<value>
+			<WildBoar>2</WildBoar>
+		    <Wolf_Timber>2</Wolf_Timber>
+		</value>
+    </Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name = "TribeBase"]/pawnGroupMakers/li[3]/options</xpath>
+		<value>
+			<WildBoar>10</WildBoar>
+		    <Wolf_Timber>10</Wolf_Timber>
+		</value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[defName = "Pirate"]/pawnGroupMakers/li[2]/options</xpath>
+		<value>
+			<Boomrat>2</Boomrat>
+			<Cougar>1</Cougar>
+		</value>
+    </Operation>
+  
+</Patch>
