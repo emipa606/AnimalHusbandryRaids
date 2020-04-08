@@ -32,8 +32,8 @@ namespace AnimalHusbandryRaids
 
         private static List<string> UpdateAnimalList(string factionDefName, List<string> currentAnimals)
         {
-            string additions = $"{GenFilePaths.ConfigFolderPath}\\{factionDefName}.additions";
-            string deletions = $"{GenFilePaths.ConfigFolderPath}\\{factionDefName}.deletions";
+            string additions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
+            string deletions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.deletions";
                                    
             try
             {

@@ -7,8 +7,17 @@
 	<supportedVersions>
 		<li>1.1</li>
 	</supportedVersions>
-	<modDependencies />
-	<loadAfter />
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+            <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>	
+		<li>brrainz.harmony</li>
+	</loadAfter>	
 	<description>Update of O Negatives mod for RimWorld 1.1
 https://ludeon.com/forums/index.php?topic=32653
 
@@ -20,8 +29,49 @@ https://invite.gg/mlie
 Non-steam version:
 https://github.com/emipa606/AnimalHusbandryRaids
 
-Added animals for the Empire-faction.
-	
+Rewrote the entire thing, now it adds animals from an internal list randomly and also you can add exceptions, one animal def per line in a config-file.
+The config-files should be created in the config folder (C:\Users\[Username]\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config on Windows)
+
+File-names:
+AnimalHusbandryRaids_[FactionName].additions - Animal definitions added here will be added to the static definition
+AnimalHusbandryRaids_[FactionName].deletions - Animal definitions added here will be removed from the static definition
+
+Valid factions:
+Empire
+Outlanders
+Tribal
+Pirate
+
+Current static animal definitions
+
+Empire:
+Bear_Grizzly
+Elephant
+AEXP_Lion			(Vanilla Animals Expanded — Desert)
+AEXP_GreatDane 		(Vanilla Animals Expanded — Cats and Dogs)
+AEXP_BlackBear		(Vanilla Animals Expanded — Boreal Forest)
+AEXP_Gorilla		(Vanilla Animals Expanded — Tropical Rainforest)
+AEXP_Tiger			(Vanilla Animals Expanded — Tropical Rainforest)
+AEXP_IndianElephant	(Vanilla Animals Expanded — Tropical Swamp)
+
+Tribal:
+WildBoar
+Wolf_Timber
+AEXP_Coyote			(Vanilla Animals Expanded — Arid Shrubland)
+AEXP_ArcticCoyote	(Vanilla Animals Expanded — Boreal Forest)
+
+Outlanders:
+LabradorRetriever
+Husky
+AEXP_GermanShepherd	(Vanilla Animals Expanded — Cats and Dogs)
+
+Pirate:
+Boomrat
+Cougar
+AEXP_Hyena			(Vanilla Animals Expanded — Desert)
+AEXP_Rottweiler		(Vanilla Animals Expanded — Cats and Dogs)
+AEXP_Jaguar			(Vanilla Animals Expanded — Tropical Rainforest)
+
 --- Original Description ---
 Tribals and Pirates like to bring domesticated animals with them when they raid you.
 Makes factions feel a bit more dynamic, and distracts you from the thought that factions have an infinite human population.</description>
