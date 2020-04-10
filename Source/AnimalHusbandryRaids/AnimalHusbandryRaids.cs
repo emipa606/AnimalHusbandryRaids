@@ -34,7 +34,6 @@ namespace AnimalHusbandryRaids
         {
             string additions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
             string deletions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.deletions";
-                                   
             try
             {
                 if (!File.Exists(additions))
@@ -58,7 +57,16 @@ namespace AnimalHusbandryRaids
             {
                 if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception.ToString()}.");
             }
-            return currentAnimals;
+
+            var returnValue = new List<string>();
+            foreach (string animalDef in currentAnimals)
+            {
+                if(GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) != null)
+                {
+                    returnValue.Add(animalDef);
+                }
+            }
+            return returnValue;
         }
 
         private static Pawn GetAnimal(string factionDefName)
@@ -79,7 +87,7 @@ namespace AnimalHusbandryRaids
                         "AEXP_Tiger",            // Vanilla Animals Expanded — Tropical Rainforest
                         "AEXP_IndianElephant"    // Vanilla Animals Expanded — Tropical Swamp
                     };
-                    UpdateAnimalList("Empire", animalDefs);
+                    animalDefs = UpdateAnimalList("Empire", animalDefs);
                     break;
                 case "OutlanderCivil":
                 case "OutlanderRough":
@@ -89,7 +97,7 @@ namespace AnimalHusbandryRaids
                         "Husky",
                         "AEXP_GermanShepherd"    // Vanilla Animals Expanded — Cats and Dogs
                     };
-                    UpdateAnimalList("Outlanders", animalDefs);
+                    animalDefs = UpdateAnimalList("Outlanders", animalDefs);
                     break;
                 case "TribeCivil":
                 case "TribeRough":
@@ -101,7 +109,7 @@ namespace AnimalHusbandryRaids
                         "AEXP_Coyote",            // Vanilla Animals Expanded — Arid Shrubland
                         "AEXP_ArcticCoyote"       // Vanilla Animals Expanded — Boreal Forest
                     };
-                    UpdateAnimalList("Tribal", animalDefs);
+                    animalDefs = UpdateAnimalList("Tribal", animalDefs);
                     break;
                 case "Pirate":
                     animalDefs = new List<string>
@@ -112,7 +120,7 @@ namespace AnimalHusbandryRaids
                         "AEXP_Rottweiler",       // Vanilla Animals Expanded — Cats and Dogs
                         "AEXP_Jaguar"            // Vanilla Animals Expanded — Tropical Rainforest
                     };
-                    UpdateAnimalList("Pirate", animalDefs);
+                    animalDefs = UpdateAnimalList("Pirate", animalDefs);
                     break;
                 default:
                     return null;
@@ -123,7 +131,9 @@ namespace AnimalHusbandryRaids
             {
                 try
                 {
+                    
                     GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), FactionUtility.DefaultFactionFrom(FactionDef.Named(factionDefName)));
+                    
                 }
                 catch
                 {
