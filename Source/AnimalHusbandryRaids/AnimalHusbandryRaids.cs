@@ -69,11 +69,11 @@ namespace AnimalHusbandryRaids
             return returnValue;
         }
 
-        private static Pawn GetAnimal(string factionDefName)
+        private static Pawn GetAnimal(Faction faction)
         {
             Pawn GeneratedPawn = null;
             List<string> animalDefs;
-            switch (factionDefName)
+            switch (faction.def.defName)
             {
                 case "Empire":
                     animalDefs = new List<string>
@@ -130,10 +130,8 @@ namespace AnimalHusbandryRaids
             while (GeneratedPawn == null && tries < maxTries)
             {
                 try
-                {
-                    
-                    GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), FactionUtility.DefaultFactionFrom(FactionDef.Named(factionDefName)));
-                    
+                {                    
+                    GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), faction);                    
                 }
                 catch
                 {
@@ -186,10 +184,10 @@ namespace AnimalHusbandryRaids
                 //if (Prefs.DevMode) Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
                 return;
             }
-            if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.def.defName}.");
+            if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
             for (int i = 0; i < amountToAdd; i++)
             {
-                Pawn foundPawn = GetAnimal(currentFaction.def.defName);
+                Pawn foundPawn = GetAnimal(currentFaction);
                 if (foundPawn == null)
                 {
                     if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
