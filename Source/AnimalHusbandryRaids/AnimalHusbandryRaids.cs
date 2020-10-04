@@ -64,12 +64,9 @@ namespace AnimalHusbandryRaids
             return returnValue;
         }
 
-        private static Pawn GetAnimal(Faction faction)
+        private static Pawn GetAnimal(Faction faction, List<string> animalDefs)
         {
             Pawn GeneratedPawn = null;
-            FactionAnimalList modExtension = faction.def.GetModExtension<FactionAnimalList>();
-            List<string> animalDefs = modExtension.FactionAnimals;
-            animalDefs = UpdateAnimalList(modExtension.FactionType, animalDefs);
 
             int tries = 0;
             while (GeneratedPawn == null && tries < maxTries)
@@ -110,9 +107,11 @@ namespace AnimalHusbandryRaids
                 return;
             }
             if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+            List<string> animalDefs = modExtension.FactionAnimals;
+            animalDefs = UpdateAnimalList(modExtension.FactionType, animalDefs);
             for (int i = 0; i < amountToAdd; i++)
             {
-                Pawn foundPawn = GetAnimal(currentFaction);
+                Pawn foundPawn = GetAnimal(currentFaction, animalDefs);
                 if (foundPawn == null)
                 {
                     if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
