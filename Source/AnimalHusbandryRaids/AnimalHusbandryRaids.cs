@@ -25,11 +25,6 @@ namespace AnimalHusbandryRaids
     {
         private const int maxTries = 100;
 
-        private const double empirePercent = 0.1;
-        private const double tribalPercent = 0.3;
-        private const double outlanderPercent = 0.2;
-        private const double piratePercent = 0.2;
-
         private static List<string> UpdateAnimalList(string factionDefName, List<string> currentAnimals)
         {
             string additions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
@@ -69,62 +64,9 @@ namespace AnimalHusbandryRaids
             return returnValue;
         }
 
-        private static Pawn GetAnimal(Faction faction)
+        private static Pawn GetAnimal(Faction faction, List<string> animalDefs)
         {
             Pawn GeneratedPawn = null;
-            List<string> animalDefs;
-            switch (faction.def.defName)
-            {
-                case "Empire":
-                    animalDefs = new List<string>
-                    {
-                        "Bear_Grizzly",
-                        "Elephant",
-                        "AEXP_Lion",             // Vanilla Animals Expanded — Desert
-                        "AEXP_GreatDane",        // Vanilla Animals Expanded — Cats and Dogs
-                        "AEXP_BlackBear",        // Vanilla Animals Expanded — Boreal Forest
-                        "AEXP_Gorilla",          // Vanilla Animals Expanded — Tropical Rainforest
-                        "AEXP_Tiger",            // Vanilla Animals Expanded — Tropical Rainforest
-                        "AEXP_IndianElephant"    // Vanilla Animals Expanded — Tropical Swamp
-                    };
-                    animalDefs = UpdateAnimalList("Empire", animalDefs);
-                    break;
-                case "OutlanderCivil":
-                case "OutlanderRough":
-                    animalDefs = new List<string>
-                    {
-                        "LabradorRetriever",
-                        "Husky",
-                        "AEXP_GermanShepherd"    // Vanilla Animals Expanded — Cats and Dogs
-                    };
-                    animalDefs = UpdateAnimalList("Outlanders", animalDefs);
-                    break;
-                case "TribeCivil":
-                case "TribeRough":
-                case "TribeSavage":
-                    animalDefs = new List<string>
-                    {
-                        "WildBoar",
-                        "Wolf_Timber",
-                        "AEXP_Coyote",            // Vanilla Animals Expanded — Arid Shrubland
-                        "AEXP_ArcticCoyote"       // Vanilla Animals Expanded — Boreal Forest
-                    };
-                    animalDefs = UpdateAnimalList("Tribal", animalDefs);
-                    break;
-                case "Pirate":
-                    animalDefs = new List<string>
-                    {
-                        "Boomrat",
-                        "Cougar",
-                        "AEXP_Hyena",            // Vanilla Animals Expanded — Desert
-                        "AEXP_Rottweiler",       // Vanilla Animals Expanded — Cats and Dogs
-                        "AEXP_Jaguar"            // Vanilla Animals Expanded — Tropical Rainforest
-                    };
-                    animalDefs = UpdateAnimalList("Pirate", animalDefs);
-                    break;
-                default:
-                    return null;
-            }
 
             int tries = 0;
             while (GeneratedPawn == null && tries < maxTries)
@@ -144,50 +86,32 @@ namespace AnimalHusbandryRaids
         static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms, bool warnOnZeroResults = true)
         {
             Faction currentFaction = parms.faction;
-            if (currentFaction.def.defName != "Empire" &&
-                currentFaction.def.defName != "OutlanderCivil" &&
-                currentFaction.def.defName != "OutlanderRough" &&
-                currentFaction.def.defName != "TribeCivil" &&
-                currentFaction.def.defName != "TribeRough" &&
-                currentFaction.def.defName != "TribeSavage" &&
-                currentFaction.def.defName != "Pirate")
+            if (!currentFaction.def.HasModExtension<FactionAnimalList>())
             {
-                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] {currentFaction.def.defName} is not a known faction, ignoring.");
+                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
+                return;
+            }
+            FactionAnimalList modExtension = currentFaction.def.GetModExtension<FactionAnimalList>();
+            if (modExtension.FactionType == "Unassigned FactionType")
+            {
+                Log.Warning($"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionType assigned in its FactionAnimalList, ignoring.");
                 return;
             }
 
             List<Pawn> resultingPawns = __result.ToList();
             int pawnsInRaid = resultingPawns.Count;
-            int amountToAdd;
-            switch (currentFaction.def.defName)
-            {
-                case "Empire":
-                    amountToAdd = (int)Math.Floor(pawnsInRaid * empirePercent);
-                    break;
-                case "OutlanderCivil":
-                case "OutlanderRough":
-                    amountToAdd = (int)Math.Floor(pawnsInRaid * outlanderPercent);
-                    break;
-                case "TribeCivil":
-                case "TribeRough":
-                case "TribeSavage":
-                    amountToAdd = (int)Math.Floor(pawnsInRaid * tribalPercent);
-                    break;
-                case "Pirate":
-                    amountToAdd = (int)Math.Floor(pawnsInRaid * piratePercent);
-                    break;
-                default:
-                    return;
-            }
+            int amountToAdd = (int)Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
             if (amountToAdd == 0)
             {
                 //if (Prefs.DevMode) Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
                 return;
             }
             if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+            List<string> animalDefs = modExtension.FactionAnimals;
+            animalDefs = UpdateAnimalList(modExtension.FactionType, animalDefs);
             for (int i = 0; i < amountToAdd; i++)
             {
-                Pawn foundPawn = GetAnimal(currentFaction);
+                Pawn foundPawn = GetAnimal(currentFaction, animalDefs);
                 if (foundPawn == null)
                 {
                     if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");

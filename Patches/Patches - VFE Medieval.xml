@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Factions Expanded - Medieval</li>
+		</mods>
+		<match Class="PatchOperationAddModExtension">
+			<xpath>Defs/FactionDef[@Name="VFEM_MedievalFactionBase" or @Name="VFEM_UnknownKingdomBase"]</xpath>
+			<value>
+				<li Class="AnimalHusbandryRaids.FactionAnimalList">
+					<FactionType>Kingdom</FactionType>
+					<PawnPercentage>0.2</PawnPercentage>
+					<FactionAnimals>
+						<li>Wolf_Timber</li>
+						<li>AEXP_GreatDane</li> <!--Vanilla Animals Expanded — Cats and Dogs-->
+						<li>AEXP_Rottweiler</li> <!--Vanilla Animals Expanded — Cats and Dogs-->
+					</FactionAnimals>
+				</li>
+			</value>
+		</match>
+	</Operation>
+</Patch>

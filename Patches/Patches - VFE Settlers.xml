@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Factions Expanded - Settlers</li>
+		</mods>
+		<match Class="PatchOperationAddModExtension">
+			<xpath>Defs/FactionDef[@Name="SettlerFactionBase"]</xpath>
+			<value>
+				<li Class="AnimalHusbandryRaids.FactionAnimalList">
+					<FactionType>Settlers</FactionType>
+					<PawnPercentage>0.2</PawnPercentage>
+					<FactionAnimals>
+						<li>LabradorRetriever</li>
+						<li>Cougar</li>
+						<li>AEXP_Coyote</li> <!--Vanilla Factions Expanded - Arid Shrubland-->
+					</FactionAnimals>
+				</li>
+			</value>
+		</match>
+	</Operation>
+</Patch>
