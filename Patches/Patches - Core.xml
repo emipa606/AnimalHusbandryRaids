@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/FactionDef[defName = "Empire"]</xpath>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>Defs/FactionDef[defName = "Empire"]</xpath>
+      <value>
+        <li Class="AnimalHusbandryRaids.FactionAnimalList">
+          <FactionType>Empire</FactionType>
+          <PawnPercentage>0.1</PawnPercentage>
+          <FactionAnimals>
+            <li>Bear_Grizzly</li>
+            <li>Elephant</li>
+            <li>AEXP_Lion</li>
+            <!--Vanilla Animals Expanded — Desert-->
+            <li>AEXP_GreatDane</li>
+            <!--Vanilla Animals Expanded — Cats and Dogs-->
+            <li>AEXP_BlackBear</li>
+            <!--Vanilla Animals Expanded — Boreal Forest-->
+            <li>AEXP_Gorilla</li>
+            <!--Vanilla Animals Expanded — Tropical Rainforest-->
+            <li>AEXP_Tiger</li>
+            <!--Vanilla Animals Expanded — Tropical Rainforest-->
+            <li>AEXP_IndianElephant</li>
+            <!--Vanilla Animals Expanded — Tropical Swamp-->
+          </FactionAnimals>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/FactionDef[defName = "OutlanderCivil" or defName = "OutlanderRough"]</xpath>
+    <value>
+      <li Class="AnimalHusbandryRaids.FactionAnimalList">
+        <FactionType>Outlanders</FactionType>
+        <PawnPercentage>0.3</PawnPercentage>
+        <FactionAnimals>
+          <li>LabradorRetriever</li>
+          <li>Husky</li>
+          <li>AEXP_GermanShepherd</li>
+          <!--Vanilla Animals Expanded — Cats and Dogs-->
+        </FactionAnimals>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/FactionDef[defName = "TribeCivil" or defName = "TribeRough" or defName = "TribeSavage"]</xpath>
+    <value>
+      <li Class="AnimalHusbandryRaids.FactionAnimalList">
+        <FactionType>Tribal</FactionType>
+        <PawnPercentage>0.2</PawnPercentage>
+        <FactionAnimals>
+          <li>WildBoar</li>
+          <li>Wolf_Timber</li>
+          <li>AEXP_Coyote</li>
+          <!--Vanilla Animals Expanded — Arid Shrubland-->
+          <li>AEXP_ArcticCoyote</li>
+          <!--Vanilla Animals Expanded — Boreal Forest-->
+        </FactionAnimals>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/FactionDef[defName = "Pirate"]</xpath>
+    <value>
+      <li Class="AnimalHusbandryRaids.FactionAnimalList">
+        <FactionType>Pirate</FactionType>
+        <PawnPercentage>0.2</PawnPercentage>
+        <FactionAnimals>
+          <li>Boomrat</li>
+          <li>Cougar</li>
+          <li>AEXP_Hyena</li>
+          <!--Vanilla Animals Expanded — Desert-->
+          <li>AEXP_Rottweiler</li>
+          <!--Vanilla Animals Expanded — Cats and Dogs-->
+          <li>AEXP_Jaguar</li>
+          <!--Vanilla Animals Expanded — Tropical Rainforest-->
+        </FactionAnimals>
+      </li>
+    </value>
+  </Operation>
+</Patch>

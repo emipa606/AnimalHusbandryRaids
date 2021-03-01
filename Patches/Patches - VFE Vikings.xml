@@ -1,26 +1,29 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Patch>
-	<Operation Class="PatchOperationFindMod">
-		<mods>
-			<li>Vanilla Factions Expanded - Vikings</li>
-		</mods>
-		<match Class="PatchOperationAddModExtension">
-			<xpath>Defs/FactionDef[@Name="VFEV_VikingBase"]</xpath>
-			<value>
-				<li Class="AnimalHusbandryRaids.FactionAnimalList">
-					<FactionType>Viking</FactionType>
-					<PawnPercentage>0.2</PawnPercentage>
-					<FactionAnimals>
-						<li>Husky</li>
-						<li>Wolf_Arctic</li>
-						<li>Bear_Polar</li>
-						<li>VFEV_Wolfhound</li> <!--Vanilla Factions Expanded - Vikings-->
-						<li>AEXP_MegaWolverine</li> <!--Vanilla Animals Expanded — Tundra-->
-						<li>AEXP_ArcticCoyote</li> <!--Vanilla Animals Expanded — Boreal Forest-->
-						<li>AEXP_BlackBear</li> <!--Vanilla Animals Expanded — Boreal Forest-->
-					</FactionAnimals>
-				</li>
-			</value>
-		</match>
-	</Operation>
+  <Operation Class="PatchOperationConditional">
+    <success>Always</success>
+    <xpath>Defs/FactionDef[@Name="VFEV_VikingBase"]</xpath>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>Defs/FactionDef[@Name="VFEV_VikingBase"]</xpath>
+      <value>
+        <li Class="AnimalHusbandryRaids.FactionAnimalList">
+          <FactionType>Viking</FactionType>
+          <PawnPercentage>0.2</PawnPercentage>
+          <FactionAnimals>
+            <li>Husky</li>
+            <li>Wolf_Arctic</li>
+            <li>Bear_Polar</li>
+            <li>VFEV_Wolfhound</li>
+            <!--Vanilla Factions Expanded - Vikings-->
+            <li>AEXP_MegaWolverine</li>
+            <!--Vanilla Animals Expanded — Tundra-->
+            <li>AEXP_ArcticCoyote</li>
+            <!--Vanilla Animals Expanded — Boreal Forest-->
+            <li>AEXP_BlackBear</li>
+            <!--Vanilla Animals Expanded — Boreal Forest-->
+          </FactionAnimals>
+        </li>
+      </value>
+    </match>
+  </Operation>
 </Patch>

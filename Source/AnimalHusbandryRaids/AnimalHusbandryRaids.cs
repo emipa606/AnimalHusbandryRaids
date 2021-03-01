@@ -25,7 +25,7 @@ namespace AnimalHusbandryRaids
     {
         private const int maxTries = 100;
 
-        private static List<string> UpdateAnimalList(string factionDefName, List<string> currentAnimals)
+        private static HashSet<string> UpdateAnimalList(string factionDefName, HashSet<string> currentAnimals)
         {
             string additions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
             string deletions = $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.deletions";
@@ -50,21 +50,22 @@ namespace AnimalHusbandryRaids
             }
             catch (Exception exception)
             {
-                if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception.ToString()}.");
+                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception}.");
             }
 
-            var returnValue = new List<string>();
+            var returnValue = new HashSet<string>();
             foreach (string animalDef in currentAnimals)
             {
-                if(GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) != null)
+                if (GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) != null)
                 {
+                    //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding, {animalDef} as possible animal.");
                     returnValue.Add(animalDef);
                 }
             }
             return returnValue;
         }
 
-        private static Pawn GetAnimal(Faction faction, List<string> animalDefs)
+        private static Pawn GetAnimal(Faction faction, HashSet<string> animalDefs)
         {
             Pawn GeneratedPawn = null;
 
@@ -72,8 +73,8 @@ namespace AnimalHusbandryRaids
             while (GeneratedPawn == null && tries < maxTries)
             {
                 try
-                {                    
-                    GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), faction);                    
+                {
+                    GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), faction);
                 }
                 catch
                 {
@@ -106,15 +107,19 @@ namespace AnimalHusbandryRaids
                 //if (Prefs.DevMode) Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
                 return;
             }
-            if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
-            List<string> animalDefs = modExtension.FactionAnimals;
+            //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+            HashSet<string> animalDefs = new HashSet<string>();
+            foreach (string animalDef in modExtension.FactionAnimals)
+            {
+                animalDefs.Add(animalDef);
+            }
             animalDefs = UpdateAnimalList(modExtension.FactionType, animalDefs);
             for (int i = 0; i < amountToAdd; i++)
             {
                 Pawn foundPawn = GetAnimal(currentFaction, animalDefs);
                 if (foundPawn == null)
                 {
-                    if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
+                    //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
                     return;
                 }
                 resultingPawns.Add(foundPawn);
