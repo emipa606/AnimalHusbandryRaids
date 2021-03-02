@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Verse;
 
 namespace AnimalHusbandryRaids
 {
-    class FactionAnimalList : DefModExtension
+    internal class FactionAnimalList : DefModExtension
     {
+        public double AnimalCommonality = 1;
+        public List<string> FactionAnimals = new List<string>();
         public string FactionType = "Unassigned FactionType";
         public double PawnPercentage = 0.1;
-        public List<String> FactionAnimals = new List<string>();
     }
 }

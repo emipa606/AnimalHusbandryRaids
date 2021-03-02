@@ -9,6 +9,7 @@
         <li Class="AnimalHusbandryRaids.FactionAnimalList">
           <FactionType>Viking</FactionType>
           <PawnPercentage>0.2</PawnPercentage>
+          <AnimalCommonality>1</AnimalCommonality>
           <FactionAnimals>
             <li>Husky</li>
             <li>Wolf_Arctic</li>

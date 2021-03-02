@@ -9,6 +9,7 @@
         <li Class="AnimalHusbandryRaids.FactionAnimalList">
           <FactionType>Kingdom</FactionType>
           <PawnPercentage>0.2</PawnPercentage>
+          <AnimalCommonality>0.9</AnimalCommonality>
           <FactionAnimals>
             <li>Wolf_Timber</li>
             <li>AEXP_GreatDane</li>

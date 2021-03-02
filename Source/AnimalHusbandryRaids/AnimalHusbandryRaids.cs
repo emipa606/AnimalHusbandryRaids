@@ -114,6 +114,27 @@ namespace AnimalHusbandryRaids
                 return;
             }
 
+            if (modExtension.AnimalCommonality < 1)
+            {
+                var randomValue = new Random().NextDouble();
+                if (modExtension.AnimalCommonality < randomValue)
+                {
+                    //if (Prefs.DevMode)
+                    //{
+                    //    Log.Message(
+                    //        $"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
+                    //}
+
+                    return;
+                }
+
+                //if (Prefs.DevMode)
+                //{
+                //    Log.Message(
+                //        $"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
+                //}
+            }
+
             var resultingPawns = __result.ToList();
             var pawnsInRaid = resultingPawns.Count;
             var amountToAdd = (int) Math.Floor(pawnsInRaid * modExtension.PawnPercentage);

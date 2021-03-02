@@ -9,6 +9,7 @@
         <li Class="AnimalHusbandryRaids.FactionAnimalList">
           <FactionType>Settlers</FactionType>
           <PawnPercentage>0.2</PawnPercentage>
+          <AnimalCommonality>1</AnimalCommonality>
           <FactionAnimals>
             <li>LabradorRetriever</li>
             <li>Cougar</li>

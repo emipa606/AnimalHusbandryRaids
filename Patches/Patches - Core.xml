@@ -9,6 +9,7 @@
         <li Class="AnimalHusbandryRaids.FactionAnimalList">
           <FactionType>Empire</FactionType>
           <PawnPercentage>0.1</PawnPercentage>
+          <!-- <AnimalCommonality>0.5</AnimalCommonality> -->
           <FactionAnimals>
             <li>Bear_Grizzly</li>
             <li>Elephant</li>
@@ -35,6 +36,7 @@
       <li Class="AnimalHusbandryRaids.FactionAnimalList">
         <FactionType>Outlanders</FactionType>
         <PawnPercentage>0.3</PawnPercentage>
+        <AnimalCommonality>0.9</AnimalCommonality>
         <FactionAnimals>
           <li>LabradorRetriever</li>
           <li>Husky</li>
@@ -50,6 +52,7 @@
       <li Class="AnimalHusbandryRaids.FactionAnimalList">
         <FactionType>Tribal</FactionType>
         <PawnPercentage>0.2</PawnPercentage>
+        <AnimalCommonality>1</AnimalCommonality>
         <FactionAnimals>
           <li>WildBoar</li>
           <li>Wolf_Timber</li>
@@ -67,6 +70,7 @@
       <li Class="AnimalHusbandryRaids.FactionAnimalList">
         <FactionType>Pirate</FactionType>
         <PawnPercentage>0.2</PawnPercentage>
+        <AnimalCommonality>0.8</AnimalCommonality>
         <FactionAnimals>
           <li>Boomrat</li>
           <li>Cougar</li>
