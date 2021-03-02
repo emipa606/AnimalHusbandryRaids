@@ -9,7 +9,7 @@
         <li Class="AnimalHusbandryRaids.FactionAnimalList">
           <FactionType>Empire</FactionType>
           <PawnPercentage>0.1</PawnPercentage>
-          <!-- <AnimalCommonality>0.5</AnimalCommonality> -->
+          <AnimalCommonality>0.5</AnimalCommonality>
           <FactionAnimals>
             <li>Bear_Grizzly</li>
             <li>Elephant</li>
