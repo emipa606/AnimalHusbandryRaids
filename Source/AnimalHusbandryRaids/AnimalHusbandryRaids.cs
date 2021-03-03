@@ -51,11 +51,17 @@ namespace AnimalHusbandryRaids
                     currentAnimals.Remove(animalToRemove);
                 }
 
-                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] The following animals was found: {currentAnimals.ToCommaList()}, have added {animalsToAdd.ToCommaList()} and removed {animalsToRemove.ToCommaList()}");
+                if (Prefs.DevMode)
+                {
+                    //Log.Message($"[AnimalHusbandryRaids] The following animals was found: {currentAnimals.ToCommaList()}, have added {animalsToAdd.ToCommaList()} and removed {animalsToRemove.ToCommaList()}");
+                }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception}.");
+                if (Prefs.DevMode)
+                {
+                    //Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception}.");
+                }
             }
 
             var returnValue = new HashSet<string>();
@@ -63,7 +69,11 @@ namespace AnimalHusbandryRaids
             {
                 if (GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) != null)
                 {
-                    //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding, {animalDef} as possible animal.");
+                    if (Prefs.DevMode)
+                    {
+                        //Log.Message($"[AnimalHusbandryRaids] Adding, {animalDef} as possible animal.");
+                    }
+
                     returnValue.Add(animalDef);
                 }
             }
@@ -94,7 +104,7 @@ namespace AnimalHusbandryRaids
         private static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms,
             bool warnOnZeroResults = true)
         {
-            if (parms.raidStrategy.ToString() == "Siege")
+            if (parms.faction == null || parms.raidStrategy == null || parms.raidStrategy.ToString() == "Siege")
             {
                 return;
             }
@@ -102,7 +112,11 @@ namespace AnimalHusbandryRaids
             var currentFaction = parms.faction;
             if (!currentFaction.def.HasModExtension<FactionAnimalList>())
             {
-                //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
+                if (Prefs.DevMode)
+                {
+                    //Log.Message($"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
+                }
+
                 return;
             }
 
@@ -114,25 +128,30 @@ namespace AnimalHusbandryRaids
                 return;
             }
 
+            if (modExtension.FactionAnimals == null)
+            {
+                Log.Warning(
+                    $"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList, ignoring.");
+                return;
+            }
+
             if (modExtension.AnimalCommonality < 1)
             {
                 var randomValue = new Random().NextDouble();
                 if (modExtension.AnimalCommonality < randomValue)
                 {
-                    //if (Prefs.DevMode)
-                    //{
-                    //    Log.Message(
-                    //        $"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
-                    //}
+                    if (Prefs.DevMode)
+                    {
+                        //Log.Message($"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
+                    }
 
                     return;
                 }
 
-                //if (Prefs.DevMode)
-                //{
-                //    Log.Message(
-                //        $"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
-                //}
+                if (Prefs.DevMode)
+                {
+                    //Log.Message($"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
+                }
             }
 
             var resultingPawns = __result.ToList();
@@ -140,11 +159,19 @@ namespace AnimalHusbandryRaids
             var amountToAdd = (int) Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
             if (amountToAdd == 0)
             {
-                //if (Prefs.DevMode) Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
+                if (Prefs.DevMode)
+                {
+                    //Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
+                }
+
                 return;
             }
 
-            //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+            if (Prefs.DevMode)
+            {
+                //Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+            }
+
             var animalDefs = new HashSet<string>();
             foreach (var animalDef in modExtension.FactionAnimals)
             {
@@ -157,7 +184,11 @@ namespace AnimalHusbandryRaids
                 var foundPawn = GetAnimal(currentFaction, animalDefs);
                 if (foundPawn == null)
                 {
-                    //if (Prefs.DevMode) Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
+                    if (Prefs.DevMode)
+                    {
+                        //Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
+                    }
+
                     return;
                 }
 
