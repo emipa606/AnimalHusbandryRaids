@@ -51,31 +51,25 @@ namespace AnimalHusbandryRaids
                     currentAnimals.Remove(animalToRemove);
                 }
 
-                if (Prefs.DevMode)
-                {
-                    //Log.Message($"[AnimalHusbandryRaids] The following animals was found: {currentAnimals.ToCommaList()}, have added {animalsToAdd.ToCommaList()} and removed {animalsToRemove.ToCommaList()}");
-                }
+                WriteDebug(
+                    $"The following animals was found: {currentAnimals.ToCommaList()}, have added {animalsToAdd.ToCommaList()} and removed {animalsToRemove.ToCommaList()}");
             }
             catch (Exception exception)
             {
-                if (Prefs.DevMode)
-                {
-                    //Log.Message($"[AnimalHusbandryRaids] Failed to create files, {exception}.");
-                }
+                WriteDebug($"Failed to create files, {exception}.");
             }
 
             var returnValue = new HashSet<string>();
             foreach (var animalDef in currentAnimals)
             {
-                if (GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) != null)
+                if (GenDefDatabase.GetDefSilentFail(typeof(ThingDef), animalDef) == null)
                 {
-                    if (Prefs.DevMode)
-                    {
-                        //Log.Message($"[AnimalHusbandryRaids] Adding, {animalDef} as possible animal.");
-                    }
-
-                    returnValue.Add(animalDef);
+                    continue;
                 }
+
+                WriteDebug($"Adding, {animalDef} as possible animal.");
+
+                returnValue.Add(animalDef);
             }
 
             return returnValue;
@@ -91,6 +85,7 @@ namespace AnimalHusbandryRaids
                 try
                 {
                     GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), faction);
+                    GeneratedPawn.inventory.DestroyAll();
                 }
                 catch
                 {
@@ -112,11 +107,7 @@ namespace AnimalHusbandryRaids
             var currentFaction = parms.faction;
             if (!currentFaction.def.HasModExtension<FactionAnimalList>())
             {
-                if (Prefs.DevMode)
-                {
-                    //Log.Message($"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
-                }
-
+                WriteDebug($"{currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
                 return;
             }
 
@@ -140,18 +131,13 @@ namespace AnimalHusbandryRaids
                 var randomValue = new Random().NextDouble();
                 if (modExtension.AnimalCommonality < randomValue)
                 {
-                    if (Prefs.DevMode)
-                    {
-                        //Log.Message($"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
-                    }
-
+                    WriteDebug(
+                        $"{modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
                     return;
                 }
 
-                if (Prefs.DevMode)
-                {
-                    //Log.Message($"[AnimalHusbandryRaids] {modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
-                }
+                WriteDebug(
+                    $"{modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
             }
 
             var resultingPawns = __result.ToList();
@@ -159,18 +145,12 @@ namespace AnimalHusbandryRaids
             var amountToAdd = (int) Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
             if (amountToAdd == 0)
             {
-                if (Prefs.DevMode)
-                {
-                    //Log.Message("[AnimalHusbandryRaids] Too few pawns to add animals to, ignoring.");
-                }
-
+                WriteDebug("Too few pawns to add animals to, ignoring.");
                 return;
             }
 
-            if (Prefs.DevMode)
-            {
-                //Log.Message($"[AnimalHusbandryRaids] Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
-            }
+            WriteDebug(
+                $"Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
 
             var animalDefs = new HashSet<string>();
             foreach (var animalDef in modExtension.FactionAnimals)
@@ -184,11 +164,7 @@ namespace AnimalHusbandryRaids
                 var foundPawn = GetAnimal(currentFaction, animalDefs);
                 if (foundPawn == null)
                 {
-                    if (Prefs.DevMode)
-                    {
-                        //Log.Message($"[AnimalHusbandryRaids] Failed to find animal after {maxTries} tries, generated {i} animals.");
-                    }
-
+                    WriteDebug($"Failed to find animal after {maxTries} tries, generated {i} animals.");
                     return;
                 }
 
@@ -196,6 +172,11 @@ namespace AnimalHusbandryRaids
             }
 
             __result = resultingPawns;
+        }
+
+        private static void WriteDebug(string message)
+        {
+            //Log.Message($"[AnimalHusbandryRaids] {message}");
         }
     }
 }
