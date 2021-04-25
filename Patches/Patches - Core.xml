@@ -13,18 +13,23 @@
           <FactionAnimals>
             <li>Bear_Grizzly</li>
             <li>Elephant</li>
-            <li>AEXP_Lion</li>
             <!--Vanilla Animals Expanded — Desert-->
-            <li>AEXP_GreatDane</li>
+            <li>AEXP_Lion</li>
             <!--Vanilla Animals Expanded — Cats and Dogs-->
-            <li>AEXP_BlackBear</li>
+            <li>AEXP_GreatDane</li>
             <!--Vanilla Animals Expanded — Boreal Forest-->
+            <li>AEXP_BlackBear</li>
+            <!--Vanilla Animals Expanded — Tropical Rainforest-->
             <li>AEXP_Gorilla</li>
             <!--Vanilla Animals Expanded — Tropical Rainforest-->
             <li>AEXP_Tiger</li>
-            <!--Vanilla Animals Expanded — Tropical Rainforest-->
-            <li>AEXP_IndianElephant</li>
             <!--Vanilla Animals Expanded — Tropical Swamp-->
+            <li>AEXP_IndianElephant</li>
+            <!--Animal Collab Project-->
+            <li>ACPLion</li>
+            <li>ACPSpiritwolf</li>
+            <li>ACPBlackbear</li>
+            <li>ACPBlackRhinoceros</li>
           </FactionAnimals>
         </li>
       </value>
@@ -40,8 +45,14 @@
         <FactionAnimals>
           <li>LabradorRetriever</li>
           <li>Husky</li>
-          <li>AEXP_GermanShepherd</li>
           <!--Vanilla Animals Expanded — Cats and Dogs-->
+          <li>AEXP_GermanShepherd</li>
+          <!--Animal Collab Project-->
+          <li>ACPBlackwolf</li>
+          <li>ACPMegabadger</li>
+          <li>ACPWoolyHorse</li>
+          <li>ACPAmurLeopard</li>
+          <li>ACPTapir</li>
         </FactionAnimals>
       </li>
     </value>
@@ -56,10 +67,17 @@
         <FactionAnimals>
           <li>WildBoar</li>
           <li>Wolf_Timber</li>
-          <li>AEXP_Coyote</li>
           <!--Vanilla Animals Expanded — Arid Shrubland-->
-          <li>AEXP_ArcticCoyote</li>
+          <li>AEXP_Coyote</li>
           <!--Vanilla Animals Expanded — Boreal Forest-->
+          <li>AEXP_ArcticCoyote</li>
+          <!--Animal Collab Project-->
+          <li>ACPKomodo</li>
+          <li>ACPWildDog</li>
+          <li>ACPDirewolf</li>
+          <li>ACPOtter</li>
+          <li>ACPPorcupine</li>
+          <li>ACPWoolyRhino</li>
         </FactionAnimals>
       </li>
     </value>
@@ -74,12 +92,18 @@
         <FactionAnimals>
           <li>Boomrat</li>
           <li>Cougar</li>
-          <li>AEXP_Hyena</li>
           <!--Vanilla Animals Expanded — Desert-->
-          <li>AEXP_Rottweiler</li>
+          <li>AEXP_Hyena</li>
           <!--Vanilla Animals Expanded — Cats and Dogs-->
-          <li>AEXP_Jaguar</li>
+          <li>AEXP_Rottweiler</li>
           <!--Vanilla Animals Expanded — Tropical Rainforest-->
+          <li>AEXP_Jaguar</li>
+          <!--Animal Collab Project-->
+          <li>ACPMegascorpion</li>
+          <li>ACPMegaFerret</li>
+          <li>ACPRedPanda</li>
+          <li>ACPHippopotamus</li>
+          <li>ACPCheetah</li>
         </FactionAnimals>
       </li>
     </value>

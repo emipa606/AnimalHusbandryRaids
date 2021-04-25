@@ -2,24 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
 
 namespace AnimalHusbandryRaids
 {
-    [StaticConstructorOnStartup]
-    internal class AnimalHusbandryRaids_Initialization
-    {
-        static AnimalHusbandryRaids_Initialization()
-        {
-            var harmony = new Harmony("mlie.AnimalHusbandryRaids");
-            var assembly = Assembly.GetExecutingAssembly();
-            harmony.PatchAll(assembly);
-        }
-    }
-
     [HarmonyPatch(typeof(PawnGroupMakerUtility), "GeneratePawns", typeof(PawnGroupMakerParms), typeof(bool))]
     public static class AnimalHusbandryRaids
     {
