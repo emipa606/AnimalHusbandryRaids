@@ -9,7 +9,7 @@ using Verse;
 namespace AnimalHusbandryRaids
 {
     [HarmonyPatch(typeof(PawnGroupMakerUtility), "GeneratePawns", typeof(PawnGroupMakerParms), typeof(bool))]
-    public static class AnimalHusbandryRaids
+    public static class PawnGroupMakerUtility_GeneratePawns
     {
         private const int maxTries = 100;
 
@@ -84,8 +84,7 @@ namespace AnimalHusbandryRaids
             return GeneratedPawn;
         }
 
-        private static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms,
-            bool warnOnZeroResults = true)
+        private static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms)
         {
             if (parms.faction == null || parms.raidStrategy == null || parms.raidStrategy.ToString() == "Siege")
             {
@@ -103,14 +102,14 @@ namespace AnimalHusbandryRaids
             if (modExtension.FactionType == "Unassigned FactionType")
             {
                 Log.Warning(
-                    $"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionType assigned in its FactionAnimalList, ignoring.");
+                    $"[PawnGroupMakerUtility_GeneratePawns] {currentFaction.def.defName} does not have a FactionType assigned in its FactionAnimalList, ignoring.");
                 return;
             }
 
             if (modExtension.FactionAnimals == null)
             {
                 Log.Warning(
-                    $"[AnimalHusbandryRaids] {currentFaction.def.defName} does not have a FactionAnimalList, ignoring.");
+                    $"[PawnGroupMakerUtility_GeneratePawns] {currentFaction.def.defName} does not have a FactionAnimalList, ignoring.");
                 return;
             }
 
@@ -164,7 +163,7 @@ namespace AnimalHusbandryRaids
 
         private static void WriteDebug(string message)
         {
-            //Log.Message($"[AnimalHusbandryRaids] {message}");
+            //Log.Message($"[PawnGroupMakerUtility_GeneratePawns] {message}");
         }
     }
 }

@@ -35,17 +35,18 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AnimalHusbandryRaids.cs" />
+    <Compile Include="IncidentWorker_RaidEnemy_GenerateRaidLoot.cs" />
+    <Compile Include="PawnGroupMakerUtility_GeneratePawns.cs" />
     <Compile Include="AnimalHusbandryRaids_Initialization.cs" />
     <Compile Include="FactionAnimalList.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.2.2753</Version>
+      <Version>*</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Lib.Harmony">
-      <Version>2.0.2</Version>
+      <Version>*</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>

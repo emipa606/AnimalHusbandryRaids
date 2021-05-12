@@ -23,30 +23,65 @@ Current static animal definitions
 Empire:
 Bear_Grizzly
 Elephant
-AEXP_Lion			(Vanilla Animals Expanded — Desert)
-AEXP_GreatDane 		(Vanilla Animals Expanded — Cats and Dogs)
-AEXP_BlackBear		(Vanilla Animals Expanded — Boreal Forest)
-AEXP_Gorilla		(Vanilla Animals Expanded — Tropical Rainforest)
-AEXP_Tiger			(Vanilla Animals Expanded — Tropical Rainforest)
-AEXP_IndianElephant	(Vanilla Animals Expanded — Tropical Swamp)
+(Vanilla Animals Expanded — Desert)
+AEXP_Lion
+(Vanilla Animals Expanded — Cats and Dogs)
+AEXP_GreatDane
+(Vanilla Animals Expanded — Boreal Forest)
+AEXP_BlackBear
+(Vanilla Animals Expanded — Tropical Rainforest)
+AEXP_Gorilla
+AEXP_Tiger
+(Vanilla Animals Expanded — Tropical Swamp)
+AEXP_IndianElephant	
+(Animal Collab Project)
+ACPLion
+ACPSpiritwolf
+ACPBlackbear
+ACPBlackRhinoceros
 
 Tribal:
 WildBoar
 Wolf_Timber
-AEXP_Coyote			(Vanilla Animals Expanded — Arid Shrubland)
-AEXP_ArcticCoyote	(Vanilla Animals Expanded — Boreal Forest)
+(Vanilla Animals Expanded — Arid Shrubland)
+AEXP_Coyote
+(Vanilla Animals Expanded — Boreal Forest)
+AEXP_ArcticCoyote
+(Animal Collab Project)
+ACPKomodo
+ACPWildDog
+ACPDirewolf
+ACPOtter
+ACPPorcupine
+ACPWoolyRhino
 
 Outlanders:
 LabradorRetriever
 Husky
-AEXP_GermanShepherd	(Vanilla Animals Expanded — Cats and Dogs)
+(Vanilla Animals Expanded — Cats and Dogs)
+AEXP_GermanShepherd
+(Animal Collab Project)
+ACPBlackwolf
+ACPMegabadger
+ACPWoolyHorse
+ACPAmurLeopard
+ACPTapir
 
 Pirate:
 Boomrat
 Cougar
-AEXP_Hyena			(Vanilla Animals Expanded — Desert)
-AEXP_Rottweiler		(Vanilla Animals Expanded — Cats and Dogs)
-AEXP_Jaguar			(Vanilla Animals Expanded — Tropical Rainforest)
+(Vanilla Animals Expanded — Desert)
+AEXP_Hyena
+(Vanilla Animals Expanded — Cats and Dogs)
+AEXP_Rottweiler
+(Vanilla Animals Expanded — Tropical Rainforest)
+AEXP_Jaguar
+(Animal Collab Project)
+ACPMegascorpion
+ACPMegaFerret
+ACPRedPanda
+ACPHippopotamus
+ACPCheetah
 
 ![Image](https://i.imgur.com/7Gzt3Rg.png)
 

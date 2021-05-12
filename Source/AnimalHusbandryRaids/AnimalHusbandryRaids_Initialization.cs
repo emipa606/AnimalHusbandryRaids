@@ -9,7 +9,7 @@ namespace AnimalHusbandryRaids
     {
         static AnimalHusbandryRaids_Initialization()
         {
-            var harmony = new Harmony("mlie.AnimalHusbandryRaids");
+            var harmony = new Harmony("mlie.PawnGroupMakerUtility_GeneratePawns");
             var assembly = Assembly.GetExecutingAssembly();
             harmony.PatchAll(assembly);
         }
