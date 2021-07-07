@@ -12,7 +12,7 @@ namespace AnimalHusbandryRaids
     {
         private static void Prefix(ref List<Pawn> pawns)
         {
-            var raiders = pawns.Count;
+            var unused = pawns.Count;
             pawns = pawns.Where(pawn => !pawn.RaceProps.Animal).ToList();
             // Log.Message($"[AnimalHusbandyRaids]: Removed {raiders - pawns.Count} animals from the loot-generator");
         }
