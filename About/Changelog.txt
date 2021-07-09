@@ -1,5 +1,8 @@
 # Changelog for AnimalHusbandryRaids
 
+1.0.15.0 - Fixed the 1.2 version that broke in the 1.3 update
+
+
 1.0.14.0 - Mod updated for 1.3 and passed autotests
 
 
