@@ -2,16 +2,15 @@
 using HarmonyLib;
 using Verse;
 
-namespace AnimalHusbandryRaids
+namespace AnimalHusbandryRaids;
+
+[StaticConstructorOnStartup]
+internal class AnimalHusbandryRaids_Initialization
 {
-    [StaticConstructorOnStartup]
-    internal class AnimalHusbandryRaids_Initialization
+    static AnimalHusbandryRaids_Initialization()
     {
-        static AnimalHusbandryRaids_Initialization()
-        {
-            var harmony = new Harmony("mlie.PawnGroupMakerUtility_GeneratePawns");
-            var assembly = Assembly.GetExecutingAssembly();
-            harmony.PatchAll(assembly);
-        }
+        var harmony = new Harmony("mlie.PawnGroupMakerUtility_GeneratePawns");
+        var assembly = Assembly.GetExecutingAssembly();
+        harmony.PatchAll(assembly);
     }
 }
