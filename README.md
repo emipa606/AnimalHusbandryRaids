@@ -107,3 +107,4 @@ Makes factions feel a bit more dynamic, and distracts you from the thought that 
 
 
 
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2052156867]Last updated 2023-01-30

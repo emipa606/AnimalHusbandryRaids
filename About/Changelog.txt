@@ -1,5 +1,8 @@
 # Changelog for AnimalHusbandryRaids
 
+1.4.2 - Animals should now be able to flee
+
+
 1.4.1 - Mod updated for 1.4 and passed autotests
 
 

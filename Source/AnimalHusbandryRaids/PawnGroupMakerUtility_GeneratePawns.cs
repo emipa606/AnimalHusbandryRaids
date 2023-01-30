@@ -74,6 +74,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
             {
                 GeneratedPawn = PawnGenerator.GeneratePawn(PawnKindDef.Named(animalDefs.RandomElement()), faction);
                 GeneratedPawn.inventory.DestroyAll();
+                GeneratedPawn.mindState.canFleeIndividual = true;
             }
             catch
             {
