@@ -1,5 +1,9 @@
 # Changelog for AnimalHusbandryRaids
 
+1.4.3 - Added setting to use venerated animals if defined.
+Used DeepL to update translations for ChineseSimplified, French, German
+
+
 1.4.2 - Animals should now be able to flee
 
 

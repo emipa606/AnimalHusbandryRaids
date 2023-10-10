@@ -93,6 +93,47 @@ public static class PawnGroupMakerUtility_GeneratePawns
         }
 
         var currentFaction = parms.faction;
+        var resultingPawns = __result.ToList();
+        var pawnsInRaid = resultingPawns.Count;
+
+        int amountToAdd;
+        HashSet<string> animalDefs;
+        if (AnimalHusbandryRaidsMod.instance.Settings.OnlyVeneratedAnimals)
+        {
+            var animals = currentFaction.ideos?.PrimaryIdeo?.VeneratedAnimals;
+
+            if (animals?.Any() == true)
+            {
+                amountToAdd = (int)Math.Floor(pawnsInRaid * 0.2f);
+                if (amountToAdd > 0)
+                {
+                    WriteDebug(
+                        $"Adding {amountToAdd} venerated animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
+                    animalDefs = new HashSet<string>();
+                    foreach (var animalDef in animals)
+                    {
+                        animalDefs.Add(animalDef.defName);
+                    }
+
+                    WriteDebug($"The following venerated animals was found: {animalDefs.ToCommaList()}");
+                    for (var i = 0; i < amountToAdd; i++)
+                    {
+                        var foundPawn = GetAnimal(currentFaction, animalDefs);
+                        if (foundPawn == null)
+                        {
+                            WriteDebug($"Failed to find animal after {maxTries} tries, generated {i} animals.");
+                            return;
+                        }
+
+                        resultingPawns.Add(foundPawn);
+                    }
+
+                    __result = resultingPawns;
+                    return;
+                }
+            }
+        }
+
         if (!currentFaction.def.HasModExtension<FactionAnimalList>())
         {
             WriteDebug($"{currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
@@ -116,7 +157,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
 
         if (modExtension.AnimalCommonality < 1)
         {
-            var randomValue = new Random().NextDouble();
+            var randomValue = Rand.Value;
             if (modExtension.AnimalCommonality < randomValue)
             {
                 WriteDebug(
@@ -128,9 +169,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
                 $"{modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
         }
 
-        var resultingPawns = __result.ToList();
-        var pawnsInRaid = resultingPawns.Count;
-        var amountToAdd = (int)Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
+        amountToAdd = (int)Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
         if (amountToAdd == 0)
         {
             WriteDebug("Too few pawns to add animals to, ignoring.");
@@ -140,7 +179,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
         WriteDebug(
             $"Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
 
-        var animalDefs = new HashSet<string>();
+        animalDefs = new HashSet<string>();
         foreach (var animalDef in modExtension.FactionAnimals)
         {
             animalDefs.Add(animalDef);
@@ -164,6 +203,11 @@ public static class PawnGroupMakerUtility_GeneratePawns
 
     private static void WriteDebug(string message)
     {
-        //Log.Message($"[PawnGroupMakerUtility_GeneratePawns] {message}");
+        if (!AnimalHusbandryRaidsMod.instance.Settings.VerboseLogging)
+        {
+            return;
+        }
+
+        Log.Message($"[PawnGroupMakerUtility_GeneratePawns] {message}");
     }
 }

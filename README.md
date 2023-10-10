@@ -106,5 +106,5 @@ Makes factions feel a bit more dynamic, and distracts you from the thought that 
 
 
 
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2052156867]![Image](https://img.shields.io/github/v/release/emipa606/AnimalHusbandryRaids?label=latest%20version&style=plastic&color=9f1111&labelColor=black)
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2052156867]Last updated 2023-01-30

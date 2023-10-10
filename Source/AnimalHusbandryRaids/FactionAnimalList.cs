@@ -5,8 +5,8 @@ namespace AnimalHusbandryRaids;
 
 internal class FactionAnimalList : DefModExtension
 {
+    public readonly double AnimalCommonality = 1;
     public readonly List<string> FactionAnimals = new List<string>();
-    public double AnimalCommonality = 1;
-    public string FactionType = "Unassigned FactionType";
-    public double PawnPercentage = 0.1;
+    public readonly string FactionType = "Unassigned FactionType";
+    public readonly double PawnPercentage = 0.1;
 }

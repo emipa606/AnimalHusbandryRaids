@@ -12,8 +12,11 @@ public static class IncidentWorker_RaidEnemy_GenerateRaidLoot
 {
     private static void Prefix(ref List<Pawn> pawns)
     {
-        var unused = pawns.Count;
+        if (pawns == null || !pawns.Any())
+        {
+            return;
+        }
+
         pawns = pawns.Where(pawn => !pawn.RaceProps.Animal).ToList();
-        // Log.Message($"[AnimalHusbandyRaids]: Removed {raiders - pawns.Count} animals from the loot-generator");
     }
 }
