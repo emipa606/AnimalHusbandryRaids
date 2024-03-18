@@ -9,6 +9,7 @@
     <li>1.2</li>
     <li>1.3</li>
     <li>1.4</li>
+    <li>1.5</li>
   </supportedVersions>
   <modDependencies>
     <li>
@@ -26,7 +27,7 @@ Update of O Negatives mod
 https://ludeon.com/forums/index.php?topic=32653
 
 Rewrote the entire thing, now it adds animals from an internal list randomly and also you can add exceptions, one animal def per line in a config-file.
-The config-files should be created in the config folder (C:\Users\[Username]\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config on Windows)
+The config-files should be created in the config folder ("C:\Users\[Username]\AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Config" on Windows)
 
 File-names:
 AnimalHusbandryRaids_[FactionName].additions - Animal definitions added here will be added to the static definition
@@ -103,6 +104,8 @@ ACPRedPanda
 ACPHippopotamus
 ACPCheetah
 
+There is also an option to instead spawn the factions venerated animals if any.
+
 [img]https://i.imgur.com/pufA0kM.png[/img]
 
 [table]
@@ -126,11 +129,14 @@ Makes factions feel a bit more dynamic, and distracts you from the thought that 
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
-[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] and command Ctrl+F12
+[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] or the standalone [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader[/url] and command Ctrl+F12
 [*] For best support, please use the Discord-channel for error-reporting.
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
+[*] Use [url=https://github.com/RimSort/RimSort/releases/latest]RimSort[/url] to sort your mods
 [/list]
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2052156867][img]https://img.shields.io/github/v/release/emipa606/AnimalHusbandryRaids?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url]</description>
+  <modIconPath IgnoreIfNoMatchingField="True">ModIcon/AnimalHusbandryRaids</modIconPath>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.0</modVersion>
 </ModMetaData>

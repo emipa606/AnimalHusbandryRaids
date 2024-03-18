@@ -16,9 +16,9 @@ public static class PawnGroupMakerUtility_GeneratePawns
     private static HashSet<string> UpdateAnimalList(string factionDefName, HashSet<string> currentAnimals)
     {
         var additions =
-            $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
+            $"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
         var deletions =
-            $@"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.deletions";
+            $"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.deletions";
         try
         {
             if (!File.Exists(additions))
@@ -109,7 +109,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
                 {
                     WriteDebug(
                         $"Adding {amountToAdd} venerated animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
-                    animalDefs = new HashSet<string>();
+                    animalDefs = [];
                     foreach (var animalDef in animals)
                     {
                         animalDefs.Add(animalDef.defName);
@@ -179,7 +179,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
         WriteDebug(
             $"Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
 
-        animalDefs = new HashSet<string>();
+        animalDefs = [];
         foreach (var animalDef in modExtension.FactionAnimals)
         {
             animalDefs.Add(animalDef);
