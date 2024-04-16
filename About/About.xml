@@ -137,6 +137,5 @@ Makes factions feel a bit more dynamic, and distracts you from the thought that 
 [/list]
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2052156867][img]https://img.shields.io/github/v/release/emipa606/AnimalHusbandryRaids?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url]</description>
-  <modIconPath IgnoreIfNoMatchingField="True">ModIcon/AnimalHusbandryRaids</modIconPath>
-  <modVersion IgnoreIfNoMatchingField="True">1.5.0</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.5.1</modVersion>
 </ModMetaData>

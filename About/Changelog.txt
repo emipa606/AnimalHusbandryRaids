@@ -1,5 +1,8 @@
 # Changelog for AnimalHusbandryRaids
 
+1.5.1 - Added cache for aimal-kinds per faction to speed up pawngeneration for large groups
+
+
 1.5.0 - Mod updated for 1.5 and passed autotests
 
 

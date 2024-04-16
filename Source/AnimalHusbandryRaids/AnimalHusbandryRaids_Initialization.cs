@@ -9,8 +9,6 @@ internal class AnimalHusbandryRaids_Initialization
 {
     static AnimalHusbandryRaids_Initialization()
     {
-        var harmony = new Harmony("mlie.PawnGroupMakerUtility_GeneratePawns");
-        var assembly = Assembly.GetExecutingAssembly();
-        harmony.PatchAll(assembly);
+        new Harmony("mlie.PawnGroupMakerUtility_GeneratePawns").PatchAll(Assembly.GetExecutingAssembly());
     }
 }
