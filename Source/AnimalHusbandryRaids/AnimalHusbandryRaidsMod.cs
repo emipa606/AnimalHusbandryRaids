@@ -10,7 +10,7 @@ internal class AnimalHusbandryRaidsMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static AnimalHusbandryRaidsMod instance;
+    public static AnimalHusbandryRaidsMod Instance;
 
     private static string currentVersion;
 
@@ -20,7 +20,7 @@ internal class AnimalHusbandryRaidsMod : Mod
     /// <param name="content"></param>
     public AnimalHusbandryRaidsMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         Settings = GetSettings<AnimalHusbandryRaidsSettings>();
         currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
@@ -46,24 +46,24 @@ internal class AnimalHusbandryRaidsMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.Gap();
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.Gap();
 
         if (ModLister.IdeologyInstalled)
         {
-            listing_Standard.CheckboxLabeled("AHR.OnlyVeneratedAnimals".Translate(), ref Settings.OnlyVeneratedAnimals);
+            listingStandard.CheckboxLabeled("AHR.OnlyVeneratedAnimals".Translate(), ref Settings.OnlyVeneratedAnimals);
         }
 
-        listing_Standard.CheckboxLabeled("AHR.VerboseLogging".Translate(), ref Settings.VerboseLogging);
+        listingStandard.CheckboxLabeled("AHR.VerboseLogging".Translate(), ref Settings.VerboseLogging);
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("AHR.CurrentModVersion".Translate(currentVersion));
+            listingStandard.Label("AHR.CurrentModVersion".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 }

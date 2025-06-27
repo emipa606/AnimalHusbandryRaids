@@ -8,14 +8,15 @@ using Verse;
 
 namespace AnimalHusbandryRaids;
 
-[HarmonyPatch(typeof(PawnGroupMakerUtility), "GeneratePawns", typeof(PawnGroupMakerParms), typeof(bool))]
+[HarmonyPatch(typeof(PawnGroupMakerUtility), nameof(PawnGroupMakerUtility.GeneratePawns), typeof(PawnGroupMakerParms),
+    typeof(bool))]
 public static class PawnGroupMakerUtility_GeneratePawns
 {
-    private const int maxTries = 100;
+    private const int MaxTries = 100;
 
     private static readonly Dictionary<string, HashSet<PawnKindDef>> factionAnimalDefs = [];
 
-    private static HashSet<string> UpdateAnimalList(string factionDefName, HashSet<string> currentAnimals)
+    private static HashSet<string> updateAnimalList(string factionDefName, HashSet<string> currentAnimals)
     {
         var additions =
             $"{GenFilePaths.ConfigFolderPath}{Path.DirectorySeparatorChar}AnimalHusbandryRaids_{factionDefName}.additions";
@@ -41,12 +42,12 @@ public static class PawnGroupMakerUtility_GeneratePawns
                 currentAnimals.Remove(animalToRemove);
             }
 
-            WriteDebug(
+            writeDebug(
                 $"The following animals was found: {currentAnimals.ToCommaList()}, have added {animalsToAdd.ToCommaList()} and removed {animalsToRemove.ToCommaList()}");
         }
         catch (Exception exception)
         {
-            WriteDebug($"Failed to create files, {exception}.");
+            writeDebug($"Failed to create files, {exception}.");
         }
 
         var returnValue = new HashSet<string>();
@@ -57,7 +58,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
                 continue;
             }
 
-            WriteDebug($"Adding, {animalDef} as possible animal.");
+            writeDebug($"Adding, {animalDef} as possible animal.");
 
             returnValue.Add(animalDef);
         }
@@ -65,18 +66,18 @@ public static class PawnGroupMakerUtility_GeneratePawns
         return returnValue;
     }
 
-    private static Pawn GetAnimal(Faction faction, HashSet<PawnKindDef> animalDefs)
+    private static Pawn getAnimal(Faction faction, HashSet<PawnKindDef> animalDefs)
     {
-        Pawn GeneratedPawn = null;
+        Pawn generatedPawn = null;
 
         var tries = 0;
-        while (GeneratedPawn == null && tries < maxTries)
+        while (generatedPawn == null && tries < MaxTries)
         {
             try
             {
-                GeneratedPawn = PawnGenerator.GeneratePawn(animalDefs.RandomElement(), faction);
-                GeneratedPawn.inventory.DestroyAll();
-                GeneratedPawn.mindState.canFleeIndividual = true;
+                generatedPawn = PawnGenerator.GeneratePawn(animalDefs.RandomElement(), faction);
+                generatedPawn.inventory.DestroyAll();
+                generatedPawn.mindState.canFleeIndividual = true;
             }
             catch
             {
@@ -84,7 +85,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
             }
         }
 
-        return GeneratedPawn;
+        return generatedPawn;
     }
 
     private static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms)
@@ -102,11 +103,11 @@ public static class PawnGroupMakerUtility_GeneratePawns
 
         if (factionAnimalDefs.TryGetValue(currentFaction.Name, out var def))
         {
-            WriteDebug($"{currentFaction.def.defName} already have an animal list cached.");
+            writeDebug($"{currentFaction.def.defName} already have an animal list cached.");
             animalPawnKinds = def;
         }
 
-        if (AnimalHusbandryRaidsMod.instance.Settings.OnlyVeneratedAnimals)
+        if (AnimalHusbandryRaidsMod.Instance.Settings.OnlyVeneratedAnimals)
         {
             if (!animalPawnKinds.Any())
             {
@@ -131,7 +132,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
         {
             if (!currentFaction.def.HasModExtension<FactionAnimalList>())
             {
-                WriteDebug($"{currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
+                writeDebug($"{currentFaction.def.defName} does not have a FactionAnimalList assigned, ignoring.");
                 return;
             }
 
@@ -155,23 +156,23 @@ public static class PawnGroupMakerUtility_GeneratePawns
                 var randomValue = Rand.Value;
                 if (modExtension.AnimalCommonality < randomValue)
                 {
-                    WriteDebug(
+                    writeDebug(
                         $"{modExtension.AnimalCommonality} commonality was not enough to spawn animals this time, random value was {randomValue}.");
                     return;
                 }
 
-                WriteDebug(
+                writeDebug(
                     $"{modExtension.AnimalCommonality} commonality was enough to spawn animals this time, random value was {randomValue}.");
             }
 
             amountToAdd = (int)Math.Floor(pawnsInRaid * modExtension.PawnPercentage);
             if (amountToAdd == 0)
             {
-                WriteDebug("Too few pawns to add animals to, ignoring.");
+                writeDebug("Too few pawns to add animals to, ignoring.");
                 return;
             }
 
-            WriteDebug(
+            writeDebug(
                 $"Adding {amountToAdd} animals to raid from {currentFaction.Name}, {currentFaction.def.defName}.");
 
             if (!animalPawnKinds.Any())
@@ -182,7 +183,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
                     animalDefs.Add(animalDef);
                 }
 
-                animalDefs = UpdateAnimalList(modExtension.FactionType, animalDefs);
+                animalDefs = updateAnimalList(modExtension.FactionType, animalDefs);
                 foreach (var animalDef in animalDefs)
                 {
                     var pawnKind = DefDatabase<PawnKindDef>.GetNamedSilentFail(animalDef);
@@ -198,10 +199,10 @@ public static class PawnGroupMakerUtility_GeneratePawns
 
         for (var i = 0; i < amountToAdd; i++)
         {
-            var foundPawn = GetAnimal(currentFaction, animalPawnKinds);
+            var foundPawn = getAnimal(currentFaction, animalPawnKinds);
             if (foundPawn == null)
             {
-                WriteDebug($"Failed to find animal after {maxTries} tries, generated {i} animals.");
+                writeDebug($"Failed to find animal after {MaxTries} tries, generated {i} animals.");
                 return;
             }
 
@@ -211,9 +212,9 @@ public static class PawnGroupMakerUtility_GeneratePawns
         __result = resultingPawns;
     }
 
-    private static void WriteDebug(string message)
+    private static void writeDebug(string message)
     {
-        if (!AnimalHusbandryRaidsMod.instance.Settings.VerboseLogging)
+        if (!AnimalHusbandryRaidsMod.Instance.Settings.VerboseLogging)
         {
             return;
         }
