@@ -43,11 +43,11 @@ internal class AnimalHusbandryRaidsMod : Mod
     ///     The settings-window
     ///     For more info: https://rimworldwiki.com/wiki/Modding_Tutorials/ModSettings
     /// </summary>
-    /// <param name="rect"></param>
-    public override void DoSettingsWindowContents(Rect rect)
+    /// <param name="inRect"></param>
+    public override void DoSettingsWindowContents(Rect inRect)
     {
         var listingStandard = new Listing_Standard();
-        listingStandard.Begin(rect);
+        listingStandard.Begin(inRect);
         listingStandard.Gap();
 
         if (ModLister.IdeologyInstalled)

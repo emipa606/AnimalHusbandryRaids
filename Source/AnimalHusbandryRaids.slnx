@@ -3,4 +3,19 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="AnimalHusbandryRaids/AnimalHusbandryRaids.csproj" />
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Text.xml" />
+  </Folder>
+  <Folder Name="/XML/Patches/">
+    <File Path="../Patches/Patches - Core.xml" />
+    <File Path="../Patches/Patches - VFE Medieval.xml" />
+    <File Path="../Patches/Patches - VFE Settlers.xml" />
+    <File Path="../Patches/Patches - VFE Vikings.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
 </Solution>

@@ -88,7 +88,7 @@ public static class PawnGroupMakerUtility_GeneratePawns
         return generatedPawn;
     }
 
-    private static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms)
+    public static void Postfix(ref IEnumerable<Pawn> __result, PawnGroupMakerParms parms)
     {
         if (parms.faction == null || parms.raidStrategy == null || parms.raidStrategy.ToString() == "Siege")
         {

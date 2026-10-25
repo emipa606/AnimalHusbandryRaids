@@ -10,7 +10,7 @@ namespace AnimalHusbandryRaids;
     typeof(List<Pawn>))]
 public static class IncidentWorker_RaidEnemy_GenerateRaidLoot
 {
-    private static void Prefix(ref List<Pawn> pawns)
+    public static void Prefix(ref List<Pawn> pawns)
     {
         if (pawns == null || !pawns.Any())
         {

@@ -5,7 +5,7 @@ using Verse;
 namespace AnimalHusbandryRaids;
 
 [StaticConstructorOnStartup]
-internal class AnimalHusbandryRaids_Initialization
+internal static class AnimalHusbandryRaids_Initialization
 {
     static AnimalHusbandryRaids_Initialization()
     {
